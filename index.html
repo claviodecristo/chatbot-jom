@@ -38,16 +38,22 @@
         }
 
         function chatbotResponse(pergunta) {
+            pergunta = pergunta.toLowerCase();
             let respostas = {
-                "1": "Para verificar o estado da sua encomenda, indique o número ou e-mail.",
-                "2": "Os prazos de entrega variam. Pode indicar o seu código postal?",
-                "3": "As devoluções podem ser feitas em até X dias. Precisa iniciar um pedido?",
-                "4": "Qual produto deseja saber mais? Podemos ajudar com detalhes técnicos.",
-                "5": "Encaminhei sua questão para um atendente. Aguarde contato."
+                "encomenda": "Para verificar o estado da sua encomenda, indique o número ou e-mail.",
+                "entrega": "Os prazos de entrega variam. Pode indicar o seu código postal?",
+                "devolução": "As devoluções podem ser feitas em até X dias. Precisa iniciar um pedido?",
+                "produto": "Qual produto deseja saber mais? Podemos ajudar com detalhes técnicos.",
+                "atendente": "Encaminhei sua questão para um atendente. Aguarde contato."
             };
-            return respostas[pergunta] || "Não entendi. Escolha uma opção válida (1-5).";
+            
+            for (let chave in respostas) {
+                if (pergunta.includes(chave)) {
+                    return respostas[chave];
+                }
+            }
+            return "Não entendi. Pode reformular sua pergunta ou escolher um dos tópicos: encomenda, entrega, devolução, produto, atendente.";
         }
     </script>
 </body>
 </html>
-
