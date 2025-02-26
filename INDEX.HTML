@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot JOM</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .chat-container { width: 300px; margin: 20px auto; border: 1px solid #ccc; padding: 10px; border-radius: 5px; }
+        .chat-box { height: 200px; overflow-y: auto; border-bottom: 1px solid #ccc; padding: 5px; }
+        .user-input { width: 90%; padding: 5px; }
+        .send-btn { padding: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Assistente Virtual JOM</h2>
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox"></div>
+        <input type="text" class="user-input" id="userInput" placeholder="Digite sua pergunta...">
+        <button class="send-btn" onclick="sendMessage()">Enviar</button>
+    </div>
+    
+    <script>
+        function sendMessage() {
+            let input = document.getElementById("userInput").value;
+            let chatBox = document.getElementById("chatBox");
+            
+            if (input.trim() !== "") {
+                chatBox.innerHTML += "<p><strong>Você:</strong> " + input + "</p>";
+                document.getElementById("userInput").value = "";
+                
+                setTimeout(() => {
+                    let resposta = chatbotResponse(input);
+                    chatBox.innerHTML += "<p><strong>Chatbot:</strong> " + resposta + "</p>";
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        function chatbotResponse(pergunta) {
+            let respostas = {
+                "1": "Para verificar o estado da sua encomenda, indique o número ou e-mail.",
+                "2": "Os prazos de entrega variam. Pode indicar o seu código postal?",
+                "3": "As devoluções podem ser feitas em até X dias. Precisa iniciar um pedido?",
+                "4": "Qual produto deseja saber mais? Podemos ajudar com detalhes técnicos.",
+                "5": "Encaminhei sua questão para um atendente. Aguarde contato."
+            };
+            return respostas[pergunta] || "Não entendi. Escolha uma opção válida (1-5).";
+        }
+    </script>
+</body>
+</html>
 
